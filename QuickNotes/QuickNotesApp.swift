@@ -25,10 +25,18 @@ struct QuickNotesApp: App {
             NotesContentView(
                 viewModel: NoteListViewModel(
                     noteInfoUseCase: NoteInfoUseCase(
-                        repository: NoteInfoRepository()
+                        repository: NoteInfoRepository(
+                            firebaseService: FireBaseService(
+                                databaseReference: Database.database().reference()
+                            )
+                        )
                     ),
                     userInfoUseCase: UserInfoUseCase(
-                        repository: UserInfoRepository()
+                        repository: UserInfoRepository(
+                            firebaseService: FireBaseService(
+                                databaseReference: Database.database().reference()
+                            )
+                        )
                     )
                 )
             )

@@ -17,15 +17,15 @@ protocol NoteInfoRepositoryProtocol {
 struct NoteInfoRepository: NoteInfoRepositoryProtocol {
     
     let firebaseService: FireBaseServiceProtocol
-    init(firebaseService: FireBaseServiceProtocol = FireBaseService.shared) {
+    init(firebaseService: FireBaseServiceProtocol) {
         self.firebaseService = firebaseService
     }
     
     func getAllNotes(child: String) -> Future<[NoteInfo], Error> {
-        self.firebaseService.getAllDataOfChild(child: child)
+        return self.firebaseService.getAllDataOfChild(child: child)
     }
     
     func addNoteByChild(child: String, noteInfo: NoteInfo) -> Future<String?, Error> {
-        self.firebaseService.addDataChildObject(object: noteInfo, child: child)
+        return self.firebaseService.addDataChildObject(object: noteInfo, child: child)
     }
 }

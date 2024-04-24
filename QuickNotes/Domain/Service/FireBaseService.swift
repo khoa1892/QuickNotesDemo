@@ -20,15 +20,18 @@ protocol FireBaseServiceProtocol {
 
 struct FireBaseService: FireBaseServiceProtocol {
     
-    static let shared = FireBaseService()
+    private let databaseReference: DatabaseReference
+    
+    init(databaseReference: DatabaseReference) {
+        self.databaseReference = databaseReference
+    }
     
     func getAllDataOfChild<T: Decodable>(child: String) -> Future<[T], Error> {
         return Future { promise in
-            let ref = Database.database().reference()
-            ref.child(child).observeSingleEvent(of: .value) { snapshot in
+            self.databaseReference.child(child).observeSingleEvent(of: .value) { snapshot in
                 var data: [T] = []
                 for note in snapshot.children {
-                    guard let snap = note as? DataSnapshot, 
+                    guard let snap = note as? DataSnapshot,
                             let value = snap.value else {
                         return
                     }
@@ -46,8 +49,7 @@ struct FireBaseService: FireBaseServiceProtocol {
     
     func getDataById<T: Decodable>(id: String, child: String) -> Future<T, Error> {
         return Future { promise in
-            let ref = Database.database().reference().child(child).child(id)
-            ref.observeSingleEvent(of: .value) { snapShot in
+            self.databaseReference.observeSingleEvent(of: .value) { snapShot in
                 guard snapShot.exists(), let value = snapShot.value as? [String: Any] else {
                     return
                 }
@@ -65,7 +67,7 @@ struct FireBaseService: FireBaseServiceProtocol {
         return Future { promise in
             do {
                 let noteData = try FirebaseDataEncoder().encode(object)
-                Database.database().reference().child(child).childByAutoId().setValue(noteData) { error, ref in
+                self.databaseReference.child(child).childByAutoId().setValue(noteData) { error, ref in
                     guard let error = error else {
                         promise(.success(ref.key))
                         return

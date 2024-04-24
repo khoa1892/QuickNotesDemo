@@ -16,7 +16,7 @@ protocol UserInfoRepositoryProtocol {
 struct UserInfoRepository: UserInfoRepositoryProtocol {
     
     let firebaseService: FireBaseServiceProtocol
-    init(firebaseService: FireBaseServiceProtocol = FireBaseService.shared) {
+    init(firebaseService: FireBaseServiceProtocol) {
         self.firebaseService = firebaseService
     }
     

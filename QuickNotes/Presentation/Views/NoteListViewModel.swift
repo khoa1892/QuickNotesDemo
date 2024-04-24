@@ -14,21 +14,21 @@ enum LoadType {
     case all
 }
 
+enum StateView {
+    case ide
+    case loading
+    case empty
+    case error(String)
+    case user(Bool)
+    case note(String?)
+    case notes([NoteInfo])
+    case dismiss
+}
+
 class NoteListViewModel {
     
     var noteInfoUseCase: NoteInfoUseCaseProtocol
     var userInfoUseCase: UserInfoUseCaseProtocol
-    
-    enum StateView {
-        case ide
-        case loading
-        case empty
-        case error(String)
-        case user(Bool)
-        case note(String?)
-        case notes([NoteInfo])
-        case dismiss
-    }
     
     @AppStorage("userId") var userId: String?
     private var userInfo: UserInfo?
@@ -39,7 +39,8 @@ class NoteListViewModel {
     }
     
     struct Input {
-        let loadTrigger: AnyPublisher<LoadType, Never>
+        let loadViewTrigger: AnyPublisher<Void, Never>
+        let loadNotesTrigger: AnyPublisher<LoadType, Never>
         let loadUserTrigger: AnyPublisher<Void, Never>
         let addNoteTrigger: AnyPublisher<String, Never>
         let createUserTrigger: AnyPublisher<String, Never>
@@ -56,7 +57,13 @@ class NoteListViewModel {
     
     func transform(input: NoteListViewModel.Input) -> NoteListViewModel.Output {
         
-        input.loadTrigger
+        input.loadViewTrigger
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+                self.stateSubject.send(.ide)
+            }.store(in: &cancellables)
+        
+        input.loadNotesTrigger
             .receive(on: DispatchQueue.main)
             .sink { [weak self] type in
                 self?.loadNoteInfos(type: type)
@@ -108,23 +115,23 @@ class NoteListViewModel {
             } receiveValue: { [weak self] notes in
                 guard let self else {
                     return
-                    }
+                }
                 guard notes.count > 0 else {
                     self.stateSubject.send(.empty)
                     return
                 }
-                guard type == .invidual else {
-                    self.stateSubject.send(.notes(notes))
-                    return
+                var newNotes = [NoteInfo]()
+                if let userId = self.userId, type == .invidual {
+                    newNotes = notes.filter({ noteInfo in
+                        return userId == noteInfo.userId
+                    })
+                } else {
+                    newNotes = notes
                 }
-                guard let userId = self.userId else {
-                    self.stateSubject.send(.notes(notes))
-                    return
+                let sortedNotes = newNotes.sorted { noteInfo1, noteInfo2 in
+                    return noteInfo1.createdAt > noteInfo2.createdAt
                 }
-                let filteredNotes = notes.filter({ noteInfo in
-                    return userId == noteInfo.userId
-                })
-                self.stateSubject.send(.notes(filteredNotes))
+                self.stateSubject.send(.notes(sortedNotes))
             }.store(in: &cancellables)
     }
     

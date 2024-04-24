@@ -17,6 +17,7 @@ struct NotesContentView: View {
     @State private var showAlert: Bool = false
     @State private var showUserAlert: Bool = false
     
+    private var loadViewTrigger = PassthroughSubject<Void, Never>()
     private var loadNotesTrigger = PassthroughSubject<LoadType, Never>()
     private var addNoteTrigger = PassthroughSubject<String, Never>()
     private var createUserTrigger = PassthroughSubject<String, Never>()
@@ -38,7 +39,8 @@ struct NotesContentView: View {
     init(viewModel: NoteListViewModel) {
         self.viewModel = viewModel
         let input = NoteListViewModel.Input.init(
-            loadTrigger: loadNotesTrigger.eraseToAnyPublisher(),
+            loadViewTrigger: loadViewTrigger.eraseToAnyPublisher(),
+            loadNotesTrigger: loadNotesTrigger.eraseToAnyPublisher(),
             loadUserTrigger: loadUserInfoTrigger.eraseToAnyPublisher(),
             addNoteTrigger: addNoteTrigger.eraseToAnyPublisher(),
             createUserTrigger: createUserTrigger.eraseToAnyPublisher()
@@ -163,11 +165,11 @@ struct NotesContentView: View {
         .onReceive(output.state, perform: { state in
             switch state {
             case .ide:
+                loadUserInfo()
+                loadNotes()
                 break
             case .notes(let notes):
-                self.notes = notes.sorted(by: { note1, note2 in
-                    return note1.createdAt > note2.createdAt
-                })
+                self.notes = notes
                 showEmptyView = false
                 showProgressView = false
                 break
@@ -196,8 +198,7 @@ struct NotesContentView: View {
             }
         })
         .onAppear(perform: {
-            loadUserInfo()
-            loadNotes()
+            loadViewTrigger.send(())
         })
     }
     
