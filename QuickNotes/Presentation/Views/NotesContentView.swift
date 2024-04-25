@@ -63,6 +63,9 @@ struct NotesContentView: View {
                     loadNotes(type: .invidual)
                 }, label: {
                     Image(systemName: "person")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .padding(.vertical, 10).padding(.horizontal, 10)
                         .font(.title)
                         .foregroundColor(.white)
                         .frame(width: 50, height: 50)
@@ -74,6 +77,9 @@ struct NotesContentView: View {
                     loadNotes(type: .all)
                 }, label: {
                     Image(systemName: "person.3")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .padding(.vertical, 5).padding(.horizontal, 5)
                         .font(.title)
                         .foregroundColor(.white)
                         .frame(width: 50, height: 50)
