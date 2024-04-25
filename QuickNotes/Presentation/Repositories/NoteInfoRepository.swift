@@ -10,8 +10,8 @@ import Combine
 import FirebaseSharedSwift
 
 protocol NoteInfoRepositoryProtocol {
-    func getAllNotes(child: String) -> Future<[NoteInfo], Error>
-    func addNoteByChild(child: String, noteInfo: NoteInfo) -> Future<String?, Error>
+    func getAllNotes(child: String) -> AnyPublisher<[NoteInfo], Error>
+    func addNoteByChild(child: String, noteInfo: NoteInfo) -> AnyPublisher<String?, Error>
     func updateNewNotes(child: String) -> AnyPublisher<[NoteInfo], Error>
 }
 
@@ -23,11 +23,11 @@ class NoteInfoRepository: NoteInfoRepositoryProtocol {
         self.firebaseService = firebaseService
     }
     
-    func getAllNotes(child: String) -> Future<[NoteInfo], Error> {
+    func getAllNotes(child: String) -> AnyPublisher<[NoteInfo], Error> {
         return self.firebaseService.getAllDataOfChild(child: child)
     }
     
-    func addNoteByChild(child: String, noteInfo: NoteInfo) -> Future<String?, Error> {
+    func addNoteByChild(child: String, noteInfo: NoteInfo) -> AnyPublisher<String?, Error> {
         return self.firebaseService.addDataChildObject(id: noteInfo.noteId, object: noteInfo, child: child)
     }
     
