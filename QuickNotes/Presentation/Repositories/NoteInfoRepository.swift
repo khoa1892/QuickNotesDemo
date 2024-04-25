@@ -12,12 +12,14 @@ import FirebaseSharedSwift
 protocol NoteInfoRepositoryProtocol {
     func getAllNotes(child: String) -> Future<[NoteInfo], Error>
     func addNoteByChild(child: String, noteInfo: NoteInfo) -> Future<String?, Error>
+    func updateNewNotes(child: String) -> AnyPublisher<[NoteInfo], Error>
 }
 
-struct NoteInfoRepository: NoteInfoRepositoryProtocol {
+class NoteInfoRepository: NoteInfoRepositoryProtocol {
     
     let firebaseService: FireBaseServiceProtocol
-    init(firebaseService: FireBaseServiceProtocol) {
+    
+    init(firebaseService: FireBaseServiceProtocol = FireBaseService.shared) {
         self.firebaseService = firebaseService
     }
     
@@ -26,6 +28,10 @@ struct NoteInfoRepository: NoteInfoRepositoryProtocol {
     }
     
     func addNoteByChild(child: String, noteInfo: NoteInfo) -> Future<String?, Error> {
-        return self.firebaseService.addDataChildObject(object: noteInfo, child: child)
+        return self.firebaseService.addDataChildObject(id: noteInfo.noteId, object: noteInfo, child: child)
+    }
+    
+    func updateNewNotes(child: String) -> AnyPublisher<[NoteInfo], Error> {
+        return self.firebaseService.observeNewData(child: child)
     }
 }

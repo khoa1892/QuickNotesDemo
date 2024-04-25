@@ -22,24 +22,7 @@ struct QuickNotesApp: App {
     
     var body: some Scene {
         WindowGroup {
-            NotesContentView(
-                viewModel: NoteListViewModel(
-                    noteInfoUseCase: NoteInfoUseCase(
-                        repository: NoteInfoRepository(
-                            firebaseService: FireBaseService(
-                                databaseReference: Database.database().reference()
-                            )
-                        )
-                    ),
-                    userInfoUseCase: UserInfoUseCase(
-                        repository: UserInfoRepository(
-                            firebaseService: FireBaseService(
-                                databaseReference: Database.database().reference()
-                            )
-                        )
-                    )
-                )
-            )
+            LoginView(viewModel: LoginViewModel())
         }
     }
 }

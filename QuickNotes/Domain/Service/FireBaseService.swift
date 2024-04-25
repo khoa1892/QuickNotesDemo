@@ -15,20 +15,21 @@ import FirebaseAuth
 protocol FireBaseServiceProtocol {
     func getAllDataOfChild<T: Decodable>(child: String) -> Future<[T], Error>
     func getDataById<T: Decodable>(id: String, child: String) -> Future<T, Error>
-    func addDataChildObject<T: Encodable>(object: T, child: String) -> Future<String?, Error>
+    func addDataChildObject<T: Encodable>(id: String, object: T, child: String) -> Future<String?, Error>
+    func observeNewData<T: Decodable>(child: String) -> AnyPublisher<[T], Error>
 }
 
 struct FireBaseService: FireBaseServiceProtocol {
     
-    private let databaseReference: DatabaseReference
+    static let shared = FireBaseService()
     
-    init(databaseReference: DatabaseReference) {
-        self.databaseReference = databaseReference
+    init() {
+        Database.database().isPersistenceEnabled = true
     }
     
     func getAllDataOfChild<T: Decodable>(child: String) -> Future<[T], Error> {
         return Future { promise in
-            self.databaseReference.child(child).observeSingleEvent(of: .value) { snapshot in
+            Database.database().reference().child(child).observeSingleEvent(of: .value) { snapshot in
                 var data: [T] = []
                 for note in snapshot.children {
                     guard let snap = note as? DataSnapshot,
@@ -49,7 +50,7 @@ struct FireBaseService: FireBaseServiceProtocol {
     
     func getDataById<T: Decodable>(id: String, child: String) -> Future<T, Error> {
         return Future { promise in
-            self.databaseReference.observeSingleEvent(of: .value) { snapShot in
+            Database.database().reference().child(child).child(id).observeSingleEvent(of: .value) { snapShot in
                 guard snapShot.exists(), let value = snapShot.value as? [String: Any] else {
                     return
                 }
@@ -63,11 +64,11 @@ struct FireBaseService: FireBaseServiceProtocol {
         }
     }
     
-    func addDataChildObject<T: Encodable>(object: T, child: String) -> Future<String?, Error> {
+    func addDataChildObject<T: Encodable>(id: String, object: T, child: String) -> Future<String?, Error> {
         return Future { promise in
             do {
                 let noteData = try FirebaseDataEncoder().encode(object)
-                self.databaseReference.child(child).childByAutoId().setValue(noteData) { error, ref in
+                Database.database().reference().child(child).child(id).setValue(noteData) { error, ref in
                     guard let error = error else {
                         promise(.success(ref.key))
                         return
@@ -80,4 +81,26 @@ struct FireBaseService: FireBaseServiceProtocol {
             
         }
     }
+    
+    func observeNewData<T: Decodable>(child: String) -> AnyPublisher<[T], Error> {
+        let notesTrigger = PassthroughSubject<[T], Error>()
+        Database.database().reference().child(child).observe(.value) { snapshot in
+            var data: [T] = []
+            for note in snapshot.children {
+                guard let snap = note as? DataSnapshot,
+                        let value = snap.value else {
+                    return
+                }
+                do {
+                    let model = try FirebaseDataDecoder().decode(T.self, from: value)
+                    data.append(model)
+                } catch let error {
+                    notesTrigger.send(completion: .failure(error))
+                }
+            }
+            notesTrigger.send(data)
+        }
+        return notesTrigger.eraseToAnyPublisher()
+    }
+    
 }

@@ -8,6 +8,7 @@
 import Foundation
 
 struct UserInfo: Codable {
+    var userId: String = UUID().uuidString
     let username: String
     let createdAt: Date
     var formatDate: String {

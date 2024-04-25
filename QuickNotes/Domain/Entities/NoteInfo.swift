@@ -8,6 +8,7 @@
 import Foundation
 
 struct NoteInfo: Codable {
+    var noteId: String = UUID().uuidString
     let content: String
     let userName: String
     let userId: String

@@ -16,6 +16,14 @@
 		104695382BD403D500A9D107 /* NoteInfoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104695372BD403D500A9D107 /* NoteInfoRepository.swift */; };
 		1046953A2BD403EA00A9D107 /* FireBaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104695392BD403EA00A9D107 /* FireBaseService.swift */; };
 		104D6A8A2BD6B00C00EDB3FD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 104D6A892BD6B00C00EDB3FD /* GoogleService-Info.plist */; };
+		10595BEC2BDA1CDE00837D71 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10595BEB2BDA1CDE00837D71 /* LoginView.swift */; };
+		10595BEE2BDA1D3A00837D71 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10595BED2BDA1D3A00837D71 /* LoginViewModel.swift */; };
+		10595BF22BDA2C2700837D71 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10595BF12BDA2C2700837D71 /* EmptyView.swift */; };
+		10595BF42BDA2D0300837D71 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10595BF32BDA2D0300837D71 /* LoadingView.swift */; };
+		10595BF62BDA3B2200837D71 /* NotePopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10595BF52BDA3B2200837D71 /* NotePopupView.swift */; };
+		10595BF82BDA3DC100837D71 /* OverlayModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10595BF72BDA3DC100837D71 /* OverlayModifier.swift */; };
+		10595BFA2BDA401400837D71 /* RoundedCornersShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10595BF92BDA401400837D71 /* RoundedCornersShape.swift */; };
+		10595BFD2BDA433F00837D71 /* BottomPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10595BFC2BDA433F00837D71 /* BottomPopupView.swift */; };
 		108B729D2BD6B56800E24B70 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 108B729C2BD6B56800E24B70 /* FirebaseAuth */; };
 		108B72A12BD6B57D00E24B70 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 108B72A02BD6B57D00E24B70 /* FirebaseAnalytics */; };
 		108B72A32BD6C3A500E24B70 /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 108B72A22BD6C3A500E24B70 /* FirebaseDatabaseSwift */; };
@@ -26,6 +34,7 @@
 		108B72AF2BD79E6F00E24B70 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108B72AE2BD79E6F00E24B70 /* UserInfo.swift */; };
 		108B72B12BD79F7C00E24B70 /* UserInfoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108B72B02BD79F7C00E24B70 /* UserInfoRepository.swift */; };
 		108B72B82BD8FB3600E24B70 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108B72B72BD8FB3600E24B70 /* Extensions.swift */; };
+		10DDB27F2BD96F9600E75B34 /* ListNoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DDB27E2BD96F9600E75B34 /* ListNoteCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,11 +48,20 @@
 		104695372BD403D500A9D107 /* NoteInfoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteInfoRepository.swift; sourceTree = "<group>"; };
 		104695392BD403EA00A9D107 /* FireBaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseService.swift; sourceTree = "<group>"; };
 		104D6A892BD6B00C00EDB3FD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		10595BEB2BDA1CDE00837D71 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		10595BED2BDA1D3A00837D71 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		10595BF12BDA2C2700837D71 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
+		10595BF32BDA2D0300837D71 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		10595BF52BDA3B2200837D71 /* NotePopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotePopupView.swift; sourceTree = "<group>"; };
+		10595BF72BDA3DC100837D71 /* OverlayModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayModifier.swift; sourceTree = "<group>"; };
+		10595BF92BDA401400837D71 /* RoundedCornersShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCornersShape.swift; sourceTree = "<group>"; };
+		10595BFC2BDA433F00837D71 /* BottomPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomPopupView.swift; sourceTree = "<group>"; };
 		108B72AA2BD6C9CC00E24B70 /* NoteListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteListViewModel.swift; sourceTree = "<group>"; };
 		108B72AC2BD79D3A00E24B70 /* UserInfoUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoUseCase.swift; sourceTree = "<group>"; };
 		108B72AE2BD79E6F00E24B70 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		108B72B02BD79F7C00E24B70 /* UserInfoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoRepository.swift; sourceTree = "<group>"; };
 		108B72B72BD8FB3600E24B70 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		10DDB27E2BD96F9600E75B34 /* ListNoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListNoteCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,8 +159,14 @@
 		104695322BD4026500A9D107 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				108B72AA2BD6C9CC00E24B70 /* NoteListViewModel.swift */,
+				10595BFB2BDA433500837D71 /* Views */,
+				10595BF02BDA283E00837D71 /* Cells */,
+				10595BEF2BDA283500837D71 /* ViewModels */,
 				103AF9DF2BCFC25700936A8E /* NotesContentView.swift */,
+				10595BEB2BDA1CDE00837D71 /* LoginView.swift */,
+				10595BF12BDA2C2700837D71 /* EmptyView.swift */,
+				10595BF32BDA2D0300837D71 /* LoadingView.swift */,
+				10595BF52BDA3B2200837D71 /* NotePopupView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -153,6 +177,31 @@
 				104695392BD403EA00A9D107 /* FireBaseService.swift */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		10595BEF2BDA283500837D71 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				108B72AA2BD6C9CC00E24B70 /* NoteListViewModel.swift */,
+				10595BED2BDA1D3A00837D71 /* LoginViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		10595BF02BDA283E00837D71 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				10DDB27E2BD96F9600E75B34 /* ListNoteCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		10595BFB2BDA433500837D71 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				10595BFC2BDA433F00837D71 /* BottomPopupView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		108B729B2BD6B51A00E24B70 /* Frameworks */ = {
@@ -175,6 +224,8 @@
 			isa = PBXGroup;
 			children = (
 				108B72B72BD8FB3600E24B70 /* Extensions.swift */,
+				10595BF72BDA3DC100837D71 /* OverlayModifier.swift */,
+				10595BF92BDA401400837D71 /* RoundedCornersShape.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -261,14 +312,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				108B72AB2BD6C9CC00E24B70 /* NoteListViewModel.swift in Sources */,
+				10595BF22BDA2C2700837D71 /* EmptyView.swift in Sources */,
 				1046953A2BD403EA00A9D107 /* FireBaseService.swift in Sources */,
+				10595BF82BDA3DC100837D71 /* OverlayModifier.swift in Sources */,
 				108B72B12BD79F7C00E24B70 /* UserInfoRepository.swift in Sources */,
 				103AF9E02BCFC25700936A8E /* NotesContentView.swift in Sources */,
+				10595BF42BDA2D0300837D71 /* LoadingView.swift in Sources */,
+				10595BFA2BDA401400837D71 /* RoundedCornersShape.swift in Sources */,
+				10595BF62BDA3B2200837D71 /* NotePopupView.swift in Sources */,
 				104695312BD4021F00A9D107 /* NoteInfoUseCase.swift in Sources */,
 				108B72AD2BD79D3A00E24B70 /* UserInfoUseCase.swift in Sources */,
+				10595BEE2BDA1D3A00837D71 /* LoginViewModel.swift in Sources */,
+				10595BFD2BDA433F00837D71 /* BottomPopupView.swift in Sources */,
 				104695382BD403D500A9D107 /* NoteInfoRepository.swift in Sources */,
+				10DDB27F2BD96F9600E75B34 /* ListNoteCell.swift in Sources */,
 				103AF9DE2BCFC25700936A8E /* QuickNotesApp.swift in Sources */,
 				108B72AF2BD79E6F00E24B70 /* UserInfo.swift in Sources */,
+				10595BEC2BDA1CDE00837D71 /* LoginView.swift in Sources */,
 				108B72B82BD8FB3600E24B70 /* Extensions.swift in Sources */,
 				1046952C2BD4005C00A9D107 /* NoteInfo.swift in Sources */,
 			);
@@ -412,6 +472,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -441,6 +502,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
