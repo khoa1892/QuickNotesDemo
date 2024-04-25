@@ -17,11 +17,12 @@ struct ListNoteCell: View {
                 .font(.body)
                 .multilineTextAlignment(.leading)
             HStack {
-                Text("Created by: \(note.userName)")
+                Text(note.userName)
                     .font(.subheadline)
                     .foregroundColor(.black)
                 Spacer()
                 Text(note.createdAt, style: .date)
+                    .font(.subheadline)
                     .foregroundColor(.black)
                     .opacity(0.8)
             }

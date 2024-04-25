@@ -32,12 +32,21 @@ struct LoginView: View {
     var body: some View {
         NavigationStack {
             VStack {
+                Text("Welcome Mai Dang Khoa Notes")
+                    .font(.largeTitle)
+                    .fontWeight(.black)
+                    .padding(.bottom, 10)
                 TextField("Enter your username", text: $username)
+                    .frame(maxWidth: .infinity)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
-                
                 Button(action: login) {
                     Text("Set Username")
+                        .fontWeight(.black)
+                        .font(.system(size: 20))
+                        .frame(maxWidth: .infinity)
+                        .foregroundColor(.white)
+                        .cornerRadius(radius: 10.0)
                 }
                 .padding()
                 .background(Color.blue)
