@@ -3,4 +3,52 @@
    uuid = "2660E299-E6DC-44C7-9A89-991A83715868"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FC124ECC-9C49-40E6-813F-FBCEABB32072"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "QuickNotes/Domain/Service/FireBaseService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "135"
+            endingLineNumber = "135"
+            landmarkName = "observeNewDataById(id:queryOrderedbyChild:child:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "FC124ECC-9C49-40E6-813F-FBCEABB32072 - 8af77c0828f60b40"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.FIRDataSnapshot) -&gt; () in QuickNotes.FireBaseService.observeNewDataById&lt;&#x3c4;_0_0 where &#x3c4;_0_0: Swift.Decodable&gt;(id: Swift.String, queryOrderedbyChild: Swift.String, child: Swift.String) -&gt; Combine.AnyPublisher&lt;Swift.Array&lt;&#x3c4;_0_0&gt;, Swift.Error&gt;"
+                  moduleName = "QuickNotes"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/khoamai/Desktop/QuickNotesDemo/QuickNotes/Domain/Service/FireBaseService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "135"
+                  endingLineNumber = "135">
+               </Location>
+               <Location
+                  uuid = "FC124ECC-9C49-40E6-813F-FBCEABB32072 - 8af77c0828f60b40"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.FIRDataSnapshot) -&gt; () in QuickNotes.FireBaseService.observeNewDataById&lt;&#x3c4;_0_0 where &#x3c4;_0_0: Swift.Decodable&gt;(id: Swift.String, queryOrderedbyChild: Swift.String, child: Swift.String) -&gt; Combine.AnyPublisher&lt;Swift.Array&lt;&#x3c4;_0_0&gt;, Swift.Error&gt;"
+                  moduleName = "QuickNotes"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/khoamai/Desktop/QuickNotesDemo/QuickNotes/Domain/Service/FireBaseService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "135"
+                  endingLineNumber = "135">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

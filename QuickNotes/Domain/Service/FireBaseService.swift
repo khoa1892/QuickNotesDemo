@@ -14,9 +14,11 @@ import FirebaseAuth
 
 protocol FireBaseServiceProtocol {
     func getAllDataOfChild<T: Decodable>(child: String) -> AnyPublisher<[T], Error>
+    func getAllDataOfChildById<T: Decodable>(id: String, queryOrderedByChild: String,child: String) -> AnyPublisher<[T], Error>
     func getDataById<T: Decodable>(id: String, child: String) -> AnyPublisher<T, Error>
     func addDataChildObject<T: Encodable>(id: String, object: T, child: String) -> AnyPublisher<String?, Error>
     func observeNewData<T: Decodable>(child: String) -> AnyPublisher<[T], Error>
+    func observeNewDataById<T: Decodable>(id: String, queryOrderedbyChild:String, child: String) -> AnyPublisher<[T], Error>
 }
 
 struct FireBaseService: FireBaseServiceProtocol {
@@ -30,6 +32,30 @@ struct FireBaseService: FireBaseServiceProtocol {
     func getAllDataOfChild<T: Decodable>(child: String) -> AnyPublisher<[T], Error> {
         let subject = PassthroughSubject<[T], Error>()
         Database.database().reference().child(child).observeSingleEvent(of: .value) { snapshot in
+            var data: [T] = []
+            for note in snapshot.children {
+                guard let snap = note as? DataSnapshot,
+                      let value = snap.value else {
+                    return
+                }
+                do {
+                    let model = try FirebaseDataDecoder().decode(T.self, from: value)
+                    data.append(model)
+                } catch let error {
+                    subject.send(completion: .failure(error))
+                }
+            }
+            subject.send(data)
+        }
+        return subject.eraseToAnyPublisher()
+    }
+    
+    func getAllDataOfChildById<T: Decodable>(id: String, queryOrderedByChild: String,child: String) -> AnyPublisher<[T], Error> {
+        let subject = PassthroughSubject<[T], Error>()
+            Database.database().reference().child(child)
+            .queryOrdered(byChild: queryOrderedByChild)
+            .queryEqual(toValue: id)
+            .observeSingleEvent(of: .value) { snapshot in
             var data: [T] = []
             for note in snapshot.children {
                 guard let snap = note as? DataSnapshot,
@@ -84,6 +110,27 @@ struct FireBaseService: FireBaseServiceProtocol {
     func observeNewData<T: Decodable>(child: String) -> AnyPublisher<[T], Error> {
         let notesTrigger = PassthroughSubject<[T], Error>()
         Database.database().reference().child(child).observe(.value) { snapshot in
+            var data: [T] = []
+            for note in snapshot.children {
+                guard let snap = note as? DataSnapshot,
+                        let value = snap.value else {
+                    return
+                }
+                do {
+                    let model = try FirebaseDataDecoder().decode(T.self, from: value)
+                    data.append(model)
+                } catch let error {
+                    notesTrigger.send(completion: .failure(error))
+                }
+            }
+            notesTrigger.send(data)
+        }
+        return notesTrigger.eraseToAnyPublisher()
+    }
+    
+    func observeNewDataById<T: Decodable>(id: String, queryOrderedbyChild:String, child: String) -> AnyPublisher<[T], Error> {
+        let notesTrigger = PassthroughSubject<[T], Error>()
+        Database.database().reference().child(child).queryOrdered(byChild: queryOrderedbyChild).queryEqual(toValue: id).observe(.value) { snapshot in
             var data: [T] = []
             for note in snapshot.children {
                 guard let snap = note as? DataSnapshot,

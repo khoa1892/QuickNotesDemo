@@ -31,6 +31,7 @@ class NoteListViewModel {
     
     private var userId: String?
     private var userInfo: UserInfo?
+    private var loadType: LoadType = .all
     
     init(userId: String?) {
         self.userId = userId
@@ -71,6 +72,7 @@ class NoteListViewModel {
         input.loadNotesTrigger
             .receive(on: DispatchQueue.main)
             .sink { [weak self] type in
+                self?.loadType = type
                 self?.loadNoteInfos(type: type)
             }.store(in: &self.cancellables)
         
@@ -89,7 +91,22 @@ class NoteListViewModel {
                 self?.loadUserInfo()
             }.store(in: &cancellables)
         
-        noteInfoUseCase.updateNewNotes()
+        updateNotes()
+        
+        return NoteListViewModel.Output(
+            state: stateSubject.eraseToAnyPublisher()
+        )
+    }
+    
+    func updateNotes() {
+        var userId: String?
+        switch self.loadType {
+        case .invidual:
+            userId = self.userId
+        default:
+            break
+        }
+        noteInfoUseCase.updateNewNotes(userId: userId, loadType: self.loadType)
             .sink { [weak self] completion in
             guard let self else {
                 return
@@ -118,15 +135,18 @@ class NoteListViewModel {
                 self.stateSubject.send(.empty)
             }
         }.store(in: &cancellables)
-
-        return NoteListViewModel.Output(
-            state: stateSubject.eraseToAnyPublisher()
-        )
     }
     
     func loadNoteInfos(type: LoadType) {
         stateSubject.send(.loading)
-        noteInfoUseCase.getNotes()
+        var userId: String?
+        switch type {
+        case .invidual:
+            userId = self.userId
+        default:
+            break
+        }
+        noteInfoUseCase.getNotes(userId: userId, loadType: type)
             .sink { [weak self] completion in
                 guard let self else {
                     return
@@ -146,15 +166,7 @@ class NoteListViewModel {
                     self.stateSubject.send(.empty)
                     return
                 }
-                var newNotes = [NoteInfo]()
-                if let userId = self.userId, type == .invidual {
-                    newNotes = notes.filter({ noteInfo in
-                        return userId == noteInfo.userId
-                    })
-                } else {
-                    newNotes = notes
-                }
-                let sortedNotes = newNotes.sorted { noteInfo1, noteInfo2 in
+                let sortedNotes = notes.sorted { noteInfo1, noteInfo2 in
                     return noteInfo1.createdAt > noteInfo2.createdAt
                 }
                 if sortedNotes.count > 0 {
@@ -199,6 +211,7 @@ class NoteListViewModel {
                 case .finished:
                     break
                 }
+                self.stateSubject.send(.dismiss)
             } receiveValue: { [weak self] userInfo in
                 self?.userInfo = userInfo
             }.store(in: &cancellables)

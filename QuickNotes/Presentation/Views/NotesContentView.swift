@@ -123,12 +123,21 @@ struct NotesContentView: View {
         }
     }
     
+    var loadingView: some View {
+        VStack {
+            if hideLoadingView {
+                LoadingView()
+            }
+        }
+    }
+    
     var body: some View {
         NavigationView {
             ZStack(alignment: .bottomTrailing, content: {
                 listNotes
                 emptyView
                 floatingButton
+                loadingView
             })
             .navigationTitle("Notes").font(.headline)
         }
@@ -168,6 +177,7 @@ struct NotesContentView: View {
                 break
             case .empty:
                 notes.removeAll()
+                hideLoadingView = true
                 showEmptyView = true
                 break
             case .loading:
@@ -187,9 +197,6 @@ struct NotesContentView: View {
         .onAppear(perform: {
             loadViewTrigger.send(())
         })
-        .overlay {
-            LoadingView().isHidden(!hideLoadingView)
-        }
         .popup(isPresented: $isPresented) {
             BottomPopupView {
                 NotePopupView(isPresented: $isPresented) { text in
