@@ -1,7 +1,7 @@
 # QuickNotesDemo
 ## 1 Requirments
 - Xcode 15.3
-- iOS 17.4
+- iOS 16+
 ## 2. Approach
 - The note application The Notes application is a simple iOS app built using SwiftUI and Firebase
 - User Interface (UI): Designed interface with SwiftUI, including screens for displaying notes, adding new notes, and set username.
@@ -15,6 +15,7 @@
 - I spent 2 days to create the application according to Assignment Breif
 ## 3. Diagram
 ![What is this](Doc/diagram.png)
+[![Watch the video](https://img.youtube.com/vi/_m316IRhE70/hqdefault.jpg)
 
 ## 4. Limitations
 - Currently, just get all notes (no screens to show notes for each users).
