@@ -15,8 +15,11 @@
 - I spent 2 days to create the application according to Assignment Breif
 ## 3. Diagram
 ![What is this](Doc/diagram.png)
-[![Watch the video](https://img.youtube.com/vi/_m316IRhE70/hqdefault.jpg)
+
 
 ## 4. Limitations
 - Currently, just get all notes (no screens to show notes for each users).
 - No edit and delete notes
+
+## 5. Demo
+<img src="Doc/demo.gif" width=60% height=60%>
